@@ -1,0 +1,15 @@
+.header-contain {
+    display: flex;
+    justify-content: space-between;
+    background-color: #FFDEAE;
+    padding: .5rem 3rem;
+    .title {
+        color: white;
+        font-weight: bold;
+        font-size: 3rem;
+    }
+    .avatar {
+        height: 3.5rem;
+        border-radius: 2rem;    
+    }
+}
