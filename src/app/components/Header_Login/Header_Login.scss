@@ -1,0 +1,26 @@
+.header-contain {
+    display: flex;
+    background-color: #FFDEAE;
+    padding: 100px 0px 10px 0px;
+        .title {
+        width: 100%;
+        color: white;
+        font-weight: bold;
+        font-size: 3rem;
+        text-align: center;        
+    }
+}
+
+.btn-header {
+    background-color:#FFDEAE; /* Green */
+    border-bottom: 6px solid white;
+    border-bottom: 1;
+    border-width: 1px;
+    color: white;
+    width: 50%;
+    height: 30pt;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
