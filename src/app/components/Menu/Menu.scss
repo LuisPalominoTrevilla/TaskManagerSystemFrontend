@@ -1,0 +1,16 @@
+.menu-contain {
+    display: flex;
+    background-color: #FFDEAE;
+    justify-content: center;
+    border-top: 1px solid white;
+    .menu-link {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 1.3rem;
+        padding: .5rem 1.5rem;
+    }
+    .active-menu {
+        background-color: #FF9800;
+    }
+}

@@ -7,7 +7,7 @@ class Header_Login extends React.Component {
       }
     render() {
         return (
-            <div className="header-contain">
+            <div className="header-login-contain">
                 <div className="container-fluid">
                     <div className="title col-12 m-auto">T</div>
                     <div className="col-3 m-auto">
