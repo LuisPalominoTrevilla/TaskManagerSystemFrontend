@@ -14,7 +14,7 @@ class Header extends React.Component {
         return (
             <div className="header-contain">
                 <div className="title">T</div>
-                <img src={this.state.images[0]} className="avatar"/>
+                <img alt='' src={this.state.images[0]} className="avatar"/>
             </div>
         )
     }
