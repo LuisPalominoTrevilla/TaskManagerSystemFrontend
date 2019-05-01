@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Login from './components/Login/Login.js';
-import Register from './components/Register/Register.js';
-import Header from './components/Header/Header';
-import Header_Login from './components/Header_Login/Header_Login';
+// import Login from './components/Login/Login.js';
+// import Register from './components/Register/Register.js';
+// import Header from './components/Header/Header';
+// import Header_Login from './components/Header_Login/Header_Login';
 import './App.scss';
 import { BrowserRouter, Route } from "react-router-dom";
 import HabitPage from './components/HabitPage/HabitPage';
