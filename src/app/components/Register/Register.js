@@ -3,6 +3,13 @@ import './Register.scss';
 import Header_Login from '../Header_Login/Header_Login';
 
 class Register extends Component{
+  constructor() {
+    super();
+    this.registerButton = this.registerButton.bind(this);
+  }
+  registerButton = () => {
+    this.props.history.push('/login');
+  }
   render(){
     return(
       <div className="container-fluid custom-container h-100">
@@ -36,7 +43,7 @@ class Register extends Component{
                 </div>
               </div>
               <div className="col-10 m-auto">
-                  <button id="button_register" class="btn-login"><b>REGISTER</b></button>
+                  <button id="button_register" class="btn-login" onClick={this.registerButton}><b>REGISTER</b></button>
                 </div>
           </form>
           <div className="footer-register"></div>
