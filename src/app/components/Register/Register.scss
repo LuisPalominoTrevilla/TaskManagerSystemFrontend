@@ -1,0 +1,17 @@
+.header-contain {
+    display: flex;
+    justify-content: space-between;
+    background-color: #FFDEAE;
+    padding: .5rem 3rem;
+    .text{
+        color: white;
+        font-weight: bold;
+    }
+}
+
+.footer-register {
+    clear: both;
+    position: relative;
+    height: 150px;
+    bottom: 0;
+}
