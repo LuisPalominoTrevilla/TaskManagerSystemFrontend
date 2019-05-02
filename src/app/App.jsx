@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-// import Login from './components/Login/Login.js';
-// import Register from './components/Register/Register.js';
-// import Header from './components/Header/Header';
-// import Header_Login from './components/Header_Login/Header_Login';
+import Login from './components/Login/Login.js';
+import Register from './components/Register/Register.js';
 import './App.scss';
 import { BrowserRouter, Route } from "react-router-dom";
 import HabitPage from './components/HabitPage/HabitPage';
@@ -17,6 +15,8 @@ class App extends Component {
         <Route path='/habits' exact component={HabitPage}/>
         <Route path='/tasks' exact component={TaskPage}/>
         <Route path='/report' exact component={ReportPage}/>
+        <Route path='/login' exact component={Login}/>
+        <Route path='/register' exact component={Register}/>
       </BrowserRouter>
     );
   }

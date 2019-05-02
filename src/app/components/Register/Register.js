@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import './Register.scss'
+import './Register.scss';
+import Header_Login from '../Header_Login/Header_Login';
 
 class Register extends Component{
   render(){
     return(
       <div className="container-fluid custom-container h-100">
+        <Header_Login/>
         <div className="col-lg-3 col-md-3 custom-div">
           <form className="form">
               <div className="card-body">
