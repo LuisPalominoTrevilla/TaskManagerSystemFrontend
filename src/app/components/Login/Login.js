@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './Login.scss'
 import Header_Login from '../Header_Login/Header_Login';
-import { Redirect } from "react-router-dom";
 
 class Login extends Component{
   constructor() {
