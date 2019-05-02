@@ -1,0 +1,62 @@
+.contain-bad-habit {
+    width: 95%;
+    display: flex;
+    margin: 1rem;
+    border: 1px solid #C80E14;
+    border-radius: .5rem;
+    img {
+        height: 6.9rem;
+        width: 11rem;
+        align-self: center;
+        margin: 1.1rem 1rem;
+    }
+    .button-negative {
+        padding: 3rem 2rem;
+        width: fit-content;
+        background-color: #C80E14;
+        color: white;
+        border-radius: .2rem;
+        align-self: center;
+    }
+    .fa-minus {
+        padding: 1rem;
+        border: 1px solid white;
+        border-radius: 2rem;
+    }
+    .content-bad-habit {
+        display: flex;
+        font-size: 1rem;
+        color: #8C8585;
+        width: 100%;
+    }
+    .information-header-bad-habit {
+        display: flex;
+    }
+    .title-bad-habit {
+        font-weight: bold;
+        color: #C80E14;
+        font-size: 2.5rem;
+        margin-right: 2rem;
+    }
+    .information-bad-habit {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .edit-erease-bad-habit {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #C80E14;
+        font-size: 1.5rem;
+    }
+    .description-bad-habit {
+        margin-left: 1rem;
+    }
+    .information-header-bad-habit {
+        align-items: center;
+    }
+    .edit-erease-bad-habit {
+        margin: 1rem;
+    }
+}

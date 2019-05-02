@@ -1,0 +1,67 @@
+.contain-both-habit {
+    width: 95%;
+    display: flex;
+    margin: 1rem;
+    border: 1px solid #EAE403;
+    border-radius: .5rem;
+    img {
+        height: 6.9rem;
+        width: 11rem;
+        align-self: center;
+        margin: 1.1rem 1rem;
+    }
+    .button-negative {
+        padding: 3rem 2rem;
+        width: fit-content;
+        background-color: #EAE403;
+        color: white;
+        border-radius: .2rem;
+        align-self: center;
+    }
+    .fa-minus {
+        padding: 1rem;
+        border: 1px solid white;
+        border-radius: 2rem;
+    }
+    .fa-plus {
+        padding: 1rem;
+        border: 1px solid white;
+        border-radius: 2rem;
+    }
+    .content-both-habit {
+        display: flex;
+        font-size: 1rem;
+        color: #8C8585;
+        width: 100%;
+    }
+    .information-header-both-habit {
+        display: flex;
+    }
+    .title-both-habit {
+        font-weight: bold;
+        color: #EAE403;
+        font-size: 2.5rem;
+        margin-right: 2rem;
+    }
+    .information-both-habit {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .edit-erease-both-habit {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #EAE403;
+        font-size: 1.5rem;
+    }
+    .description-both-habit {
+        margin-left: 1rem;
+    }
+    .information-header-both-habit {
+        align-items: center;
+    }
+    .edit-erease-both-habit {
+        margin: 1rem;
+    }
+}

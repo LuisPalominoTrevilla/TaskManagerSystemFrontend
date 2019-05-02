@@ -1,0 +1,62 @@
+.contain-good-habit {
+    width: 95%;
+    display: flex;
+    margin: 1rem;
+    border: 1px solid #8BC34A;
+    border-radius: .5rem;
+    img {
+        height: 6.9rem;
+        width: 11rem;
+        align-self: center;
+        margin: 1.1rem 1rem;
+    }
+    .button-positive {
+        padding: 3rem 2rem;
+        width: fit-content;
+        background-color: #8BC34A;
+        color: white;
+        border-radius: .2rem;
+        align-self: center;
+    }
+    .fa-plus {
+        padding: 1rem;
+        border: 1px solid white;
+        border-radius: 2rem;
+    }
+    .content-good-habit {
+        display: flex;
+        font-size: 1rem;
+        color: #8C8585;
+        width: 100%;
+    }
+    .information-header-good-habit {
+        display: flex;
+    }
+    .title-good-habit {
+        font-weight: bold;
+        color: #8BC34A;
+        font-size: 2.5rem;
+        margin-right: 2rem;
+    }
+    .information-good-habit {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .edit-erease-good-habit {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #8BC34A;
+        font-size: 1.5rem;
+    }
+    .description-good-habit {
+        margin-left: 1rem;
+    }
+    .information-header-good-habit {
+        align-items: center;
+    }
+    .edit-erease-good-habit {
+        margin: 1rem;
+    }
+}
