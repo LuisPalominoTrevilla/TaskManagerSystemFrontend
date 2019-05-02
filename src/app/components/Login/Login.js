@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './Login.scss'
-import Header_Login from '../Header_Login/Header_Login';
+import HeaderLogin from '../HeaderLogin/HeaderLogin';
 
 class Login extends Component{
   constructor() {
@@ -14,7 +14,7 @@ class Login extends Component{
   render(){
     return(
         <div className="container-fluid custom-container h-100">
-          <Header_Login/>
+          <HeaderLogin/>
           <div className="col-lg-3 col-md-3 custom-div">
             <form className="form">
                 <div className="card-body">

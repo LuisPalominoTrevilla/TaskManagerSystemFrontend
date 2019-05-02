@@ -1,11 +1,8 @@
 import React from 'react';
-import './Header_Login.scss';
+import './HeaderLogin.scss';
 import { NavLink } from 'react-router-dom';
 
 class Header_Login extends React.Component {
-    constructor() {
-        super();
-      }
     render() {
         return (
             <div className="header-login-contain">

@@ -14,7 +14,7 @@ class App extends Component {
       <BrowserRouter>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
         <Route path='/' exact render = {() => (
-          global.user != '' ? <Redirect to='/habits'/> : <Redirect to='/login'/> 
+          global.user !== '' ? <Redirect to='/habits'/> : <Redirect to='/login'/> 
         )}/>
         <Route path='/habits' exact component={HabitPage}/>
         <Route path='/tasks' exact component={TaskPage}/>
