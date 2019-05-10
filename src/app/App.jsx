@@ -7,6 +7,7 @@ import HabitPage from './components/HabitPage/HabitPage';
 import TaskPage from './components/TaskPage/TaskPage';
 import ReportPage from './components/ReportPage/ReportPage';
 import AddHabit from './components/HabitPage/AddHabit/AddHabit';
+import AddTask from './components/TaskPage/AddTask/AddTask';
 import './global.js';
 
 class App extends Component {
