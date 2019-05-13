@@ -1,14 +1,62 @@
 import React, {Component} from 'react';
 import './Register.scss';
 import HeaderLogin from '../HeaderLogin/HeaderLogin';
+import {accountRegister } from '../../actions/account';
+import  Notify  from '../../utils/notifier';
 
 class Register extends Component{
   constructor() {
     super();
+    this.state = {
+      email: null,
+      password: null,
+      confirmPassword: null,
+      name: null
+    }
     this.registerButton = this.registerButton.bind(this);
+    this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
   }
+  handleChangeEmail = (e) => {
+    this.setState({
+      email: e.target.value
+    });
+  }
+  handleChangePassword = (e) => {
+    this.setState({
+      password: e.target.value
+    });
+  }
+  handleChangeName = (e) => {
+    this.setState({
+      name: e.target.value
+    });
+  }
+  handleChangeConfirmPassword = (e) => {
+    this.setState({
+      password: e.target.value
+    });
+  }
+
   registerButton = () => {
-    this.props.history.push('/login');
+    accountRegister(this.state.email, this.state.password, this.state.name).then(
+      (res) => {
+        console.log(res);
+        if(res.data.name) {
+          this.props.history.push('/login');
+          this.setState({
+            email: null,
+            password: null,
+            name: null
+          })
+        }
+      }
+    ).catch((err) => {
+        Notify.createNotification('error', 'LogIn Error', err.message);
+      }
+    );
   }
   render(){
     return(
@@ -21,29 +69,29 @@ class Register extends Component{
                   <p>Name</p>
                 </div>
                 <div className="input-group">
-                  <input id="input_name" type="text" className="form-control" placeholder="Name"/>
+                  <input id="input_name" type="text" className="form-control" placeholder="Name" onChange={this.handleChangeName}/>
                 </div>
                 <div className="input-group text">
                   <p>Email</p>
                 </div>
                 <div className="input-group">
-                  <input id="input_email" type="text" className="form-control" placeholder="Email"/>
+                  <input id="input_email" type="text" className="form-control" placeholder="Email" onChange={this.handleChangeEmail}/>
                 </div>
                 <div className="input-group text">
                   <p>Password</p>
                 </div>
                 <div className="input-group">
-                  <input id="input_password" type="password" placeholder="Password" className="form-control"/>
+                  <input id="input_password" type="password" placeholder="Password" className="form-control" onChange={this.handleChangePassword}/>
                 </div>
                 <div className="input-group text">
                   <p>Confirm Password</p>
                 </div>
                 <div className="input-group">
-                  <input id="input_confirmPassword" type="password" placeholder="Password" className="form-control"/>
+                  <input id="input_confirmPassword" type="password" placeholder="Password" className="form-control" onChange={this.handleChangeConfirmPassword}/>
                 </div>
               </div>
               <div className="col-10 m-auto">
-                  <button id="button_register" class="btn-login" onClick={this.registerButton}><b>REGISTER</b></button>
+                  <button type='button' id="button_register" className="btn-login" onClick={this.registerButton}><b>REGISTER</b></button>
                 </div>
           </form>
           <div className="footer-register"></div>
