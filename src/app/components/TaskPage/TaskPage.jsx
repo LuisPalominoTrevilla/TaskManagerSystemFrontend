@@ -33,19 +33,12 @@ class TaskPage extends React.Component {
         <div className='task-contain'>
             <Header/>
             <Menu/>
-            <div>
-                <div className="col-12">
-                    <div className="col-2 ml-auto">
-                        <Button variant="primary" onClick={this.handleShow}>
-                            Add Task
-                        </Button>                    
-                    </div>                    
-                    <Modal size="xl" show={this.state.show} onHide={this.handleClose}>
-                        <AddTask />
-                    </Modal>
+            <div className='habits'>
+                <div className='habit-button-alignment'>
+                    <AddTask/>
                 </div>
-            <Task/>
             </div>
+            <Task/>
         </div>)
     }
 }

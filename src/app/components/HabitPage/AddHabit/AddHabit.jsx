@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Figure, Button} from 'react-bootstrap';
+import { Form, Modal } from 'react-bootstrap';
 import Select from 'react-select';
 import './AddHabit.scss';
 
@@ -16,17 +16,37 @@ const habitTypes = [
   ];
 
 class AddHabit extends React.Component {
+    constructor() {
+        super();
+    
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+    
+        this.state = {
+          show: false,
+        };
+      }
+    
+    handleClose() {
+        this.setState({ show: false });
+    }
+    
+    handleShow() {
+        this.setState({ show: true });
+    }
 
     
     render() {
         return (
-            <div className='container container-add-habit'>
+            <div>
+            <button className='habit-page-button' onClick={this.handleShow}>+</button>
+            <Modal className='container container-add-habit' show={this.state.show} onHide={this.handleClose}>
                 <div className='row col-12 m-auto addHabit-header'>
                     <div className="col-6">
                         <div className="col-12 title-addHabit">ADD HABIT</div>
                     </div>
                     <div className="col-6">
-                        <button type="button" id="button_close" className="close close-btn" aria-label="Close">
+                        <button type="button" id="button_close" className="close close-btn" aria-label="Close" onClick={this.handleClose}>
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>                                           
@@ -84,6 +104,7 @@ class AddHabit extends React.Component {
                         </div>
                     </div>
                 </div>
+            </Modal>
             </div>
         )
     }

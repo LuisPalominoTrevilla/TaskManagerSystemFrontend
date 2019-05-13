@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Row, Col} from 'react-bootstrap';
+import {Form, Modal, Col} from 'react-bootstrap';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import Select from 'react-select';
@@ -44,6 +44,13 @@ class AddTask extends React.Component {
         this.state = {
           selectedDay: undefined,
         };
+
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+    
+        this.state = {
+          show: false,
+        };
       }
       handleDayClick(day) {
         this.setState({ selectedDay: day });
@@ -53,15 +60,25 @@ class AddTask extends React.Component {
         console.log(value);
     }
 
+    handleClose() {
+        this.setState({ show: false });
+    }
+    
+    handleShow() {
+        this.setState({ show: true });
+    }
+
     render() {
         return (
-            <div className='container container-add-task'>
+            <div>
+            <button className='habit-page-button' onClick={this.handleShow}>+</button>
+            <Modal size ="xl"className='container container-add-task' show={this.state.show} onHide={this.handleClose}>
                 <div className='row col-12 m-auto addTask-header'>
                     <div className="col-6">
                         <div className="col-12 title-addTask">ADD TASK</div>
                     </div>
                     <div className="col-6">
-                        <button type="button" id="button_close" className="close close-btn" aria-label="Close">
+                        <button type="button" id="button_close" className="close close-btn" aria-label="Close" onClick={this.handleClose}>
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>                                           
@@ -131,6 +148,7 @@ class AddTask extends React.Component {
                         </div>
                     </div>
                 </div>
+            </Modal>
             </div>
         )
     }

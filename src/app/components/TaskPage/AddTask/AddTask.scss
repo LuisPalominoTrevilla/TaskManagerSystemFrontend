@@ -1,7 +1,6 @@
 .container-add-task {
     width: 70%;
     margin: 1rem;
-    border: 1px solid #F7AF47;
     border-radius: .05rem;
     .addTask-header{
         border-bottom: .1rem solid #F7AF47;
@@ -43,4 +42,25 @@
             text-align: center;
         }
     }
+}
+
+@media (min-width: 1200px){
+    .container-add-task {
+        max-width: none!important;
+    }
+}
+
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: none!important;
+    }
+}
+
+.modal-content {
+    width: 70%!important;
+    border: 1px solid #F7AF47;
+}
+
+.modal {
+    left: 15%!important;
 }
