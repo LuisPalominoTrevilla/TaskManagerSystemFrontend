@@ -61,7 +61,7 @@ class AddHabit extends React.Component {
                             </div>
                             <div className="row col-12">
                                 <div className="col-6">
-                                <button id="button_upload" class="custom-btn"><b>UPLOAD IMAGE</b></button>                            </div>
+                                <button id="button_upload" className="custom-btn"><b>UPLOAD IMAGE</b></button>                            </div>
                                 <div className="col-6">
                                     <p id="p_fileName">File:</p>
                                 </div>
@@ -99,7 +99,7 @@ class AddHabit extends React.Component {
                                 </div>                    
                             </div>
                             <div className="col-8 m-auto">
-                                <button id="button_addHabit" class="custom-btn"><b>ADD</b></button>                            
+                                <button id="button_addHabit" className="custom-btn"><b>ADD</b></button>                            
                             </div>
                         </div>
                     </div>

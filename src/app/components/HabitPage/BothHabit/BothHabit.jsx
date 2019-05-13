@@ -6,7 +6,7 @@ class BothHabit extends React.Component {
         return (
             <div className='contain-both-habit'>
                 <div className='button-negative'>
-                    <i class="fas fa-plus"></i>
+                    <i className="fas fa-plus"></i>
                 </div>
                 <div className='content-both-habit'>
                     <img 
@@ -29,13 +29,13 @@ class BothHabit extends React.Component {
                             </div>
                         </div>
                         <div className="edit-erease-both-habit">
-                            <i class="fas fa-pencil-alt"></i>
-                            <i class="fas fa-trash-alt"></i>
+                            <i className="fas fa-pencil-alt"></i>
+                            <i className="fas fa-trash-alt"></i>
                         </div>
                     </div>
                 </div>
                 <div className='button-negative'>
-                    <i class="fas fa-minus"></i>
+                    <i className="fas fa-minus"></i>
                 </div>
             </div>
         )
