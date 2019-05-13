@@ -40,8 +40,7 @@ class Login extends Component{
         }
       }
     ).catch((err) => {
-      Notify.createNotification('error', 'LogIn Error', err.message);
-
+        Notify.createNotification('error', 'LogIn Error', err.message);
       }
     );
 
