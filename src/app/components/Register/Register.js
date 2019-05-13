@@ -36,27 +36,37 @@ class Register extends Component{
   }
   handleChangeConfirmPassword = (e) => {
     this.setState({
-      password: e.target.value
+      confirmPassword: e.target.value
     });
   }
 
   registerButton = () => {
-    accountRegister(this.state.email, this.state.password, this.state.name).then(
-      (res) => {
-        console.log(res);
-        if(res.data.name) {
-          this.props.history.push('/login');
-          this.setState({
-            email: null,
-            password: null,
-            name: null
-          })
-        }
+    if(this.state.confirmPassword === this.state.password) {
+      if(this.state.name && this.state.email && this.state.password && this.state.confirmPassword){
+        accountRegister(this.state.email, this.state.password, this.state.name).then(
+          (res) => {
+            if(res.data.name) {
+              this.props.history.push('/login');
+              this.setState({
+                email: null,
+                password: null,
+                name: null
+              })
+            }
+          }
+        ).catch((err) => {
+            Notify.createNotification('error', 'Register Error', err.message);
+          }
+        );
       }
-    ).catch((err) => {
-        Notify.createNotification('error', 'LogIn Error', err.message);
+      else {
+        Notify.createNotification('error', 'Register Error', 'Fill in all the spaces');
       }
-    );
+    }
+    else {
+      console.log(this.state.confirmPassword, this.state.password);
+      Notify.createNotification('error', 'Register Error', 'Passwords are not the same');
+    }
   }
   render(){
     return(

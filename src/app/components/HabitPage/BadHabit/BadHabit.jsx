@@ -26,13 +26,13 @@ class BadHabit extends React.Component {
                             </div>
                         </div>
                         <div className="edit-erease-bad-habit">
-                            <i class="fas fa-pencil-alt"></i>
-                            <i class="fas fa-trash-alt"></i>
+                            <i className="fas fa-pencil-alt"></i>
+                            <i className="fas fa-trash-alt"></i>
                         </div>
                     </div>
                 </div>
                 <div className='button-negative'>
-                    <i class="fas fa-minus"></i>
+                    <i className="fas fa-minus"></i>
                 </div>
             </div>
         )

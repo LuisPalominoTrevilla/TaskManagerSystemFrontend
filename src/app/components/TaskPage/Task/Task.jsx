@@ -16,15 +16,15 @@ export default class Task extends Component {
                 </div>
             </div>
             <div className="edit-erease-task">
-                <i class="fas fa-pencil-alt"></i>
-                <i class="fas fa-trash-alt"></i>
+                <i className="fas fa-pencil-alt"></i>
+                <i className="fas fa-trash-alt"></i>
             </div>
           </div>
           <div className='task-description'>
               Study for my math exam, that is tomorrow. Topics are: Derivatives, Integrals and Graphs.
           </div>
           <div className= 'd-flex justify-content-between'>
-            <i class="fas fa-bell"></i>
+            <i className="fas fa-bell"></i>
             <select name='progress' className='select-progress-task'>
                 <option value='toDo'>TO DO</option>
                 <option value='inProgress'>IN PROGRESS</option>

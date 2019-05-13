@@ -6,7 +6,7 @@ class GoodHabit extends React.Component {
         return (
             <div className='contain-good-habit'>
                 <div className='button-positive'>
-                    <i class="fas fa-plus"></i>
+                    <i className="fas fa-plus"></i>
                 </div>
                 <div className='content-good-habit'>
                     <img 
@@ -29,8 +29,8 @@ class GoodHabit extends React.Component {
                             </div>
                         </div>
                         <div className="edit-erease-good-habit">
-                            <i class="fas fa-pencil-alt"></i>
-                            <i class="fas fa-trash-alt"></i>
+                            <i className="fas fa-pencil-alt"></i>
+                            <i className="fas fa-trash-alt"></i>
                         </div>
                     </div>
                 </div>
