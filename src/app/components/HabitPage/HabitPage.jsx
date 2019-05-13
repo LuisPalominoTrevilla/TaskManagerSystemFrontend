@@ -5,6 +5,7 @@ import './HabitPage.scss';
 import GoodHabit from './GoodHabit/GoodHabit';
 import BadHabit from './BadHabit/BadHabit';
 import BothHabit from './BothHabit/BothHabit';
+import AddHabit from './AddHabit/AddHabit';
 
 class HabitPage extends React.Component {
     render() {
@@ -13,6 +14,9 @@ class HabitPage extends React.Component {
             <Header/>
             <Menu/>
             <div className='habits'>
+                <div className='habit-button-alignment'>
+                <AddHabit/>
+                </div>
                 <GoodHabit/>
                 <BadHabit/>
                 <BothHabit/>

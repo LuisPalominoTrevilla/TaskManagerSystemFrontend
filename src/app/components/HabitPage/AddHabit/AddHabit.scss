@@ -1,7 +1,6 @@
 .container-add-habit {
     width: 70%;
     margin: 1rem;
-    border: 1px solid #F7AF47;
     border-radius: .05rem;
     .addHabit-header{
         border-bottom: .1rem solid #F7AF47;
@@ -38,4 +37,35 @@
         font-size: 16px;
         border-radius: 4px;
     }
+}
+
+.habit-page-button {
+    color: white;
+    font-weight: bold;
+    padding: .5rem .9rem;
+    background-color: #F7AF47;
+    border-radius: 2rem;
+    border: none;
+    margin-top: 1rem;
+}
+
+@media (min-width: 1200px){
+    .container-add-habit {
+        max-width: none!important;
+    }
+}
+
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: none!important;
+    }
+}
+
+.modal-content {
+    width: 70%!important;
+    border: 1px solid #F7AF47;
+}
+
+.modal {
+    left: 15%!important;
 }
