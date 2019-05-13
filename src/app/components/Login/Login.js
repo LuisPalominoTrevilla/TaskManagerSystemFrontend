@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Login.scss'
 import HeaderLogin from '../HeaderLogin/HeaderLogin';
+import {accountLogin } from '../../actions/account';
 
 class Login extends Component{
   constructor() {
@@ -10,6 +11,9 @@ class Login extends Component{
 
   logInButton = () => {
     this.props.history.push('/habits');
+  }
+  componentDidMount(){
+    accountLogin();
   }
   render(){
     return(
@@ -32,7 +36,7 @@ class Login extends Component{
                   </div>
                 </div>
                 <div className="col-10 m-auto">
-                  <button id="button_login" class="btn-login" onClick={this.logInButton}><b>LOG IN</b></button>
+                  <button id="button_login" className="btn-login" onClick={this.logInButton}><b>LOG IN</b></button>
                 </div>
             </form>
           </div>
