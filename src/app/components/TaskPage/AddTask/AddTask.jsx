@@ -1,9 +1,11 @@
 import React from 'react';
-import {Form, Modal, Col} from 'react-bootstrap';
+import {Form, Modal} from 'react-bootstrap';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import Select from 'react-select';
 import './AddTask.scss';
+import { addTask } from '../../../actions/tasks';
+import  Notify  from '../../../utils/notifier';
 
 const hours = [
     { label: "01", value: 1 }, { label: "02", value: 2 }, { label: "03", value: 3 },
@@ -37,23 +39,43 @@ const hours = [
 
 class AddTask extends React.Component {
     
-
     constructor(props) {
         super(props);
         this.handleDayClick = this.handleDayClick.bind(this);
         this.state = {
           selectedDay: undefined,
+          title: null,
+          description: null,
+          dueDate: null,
+          reminderDate: null,
+          userId: null,
+          image: null,
+          reminder: false,
+          imageURL: '',
+          hours: null,
+          minutes: null,
+          selectDay: null,
         };
 
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleChangeDescription = this.handleChangeDescription.bind(this);
+        this.handleChangeHours = this.handleChangeHours.bind(this);
+        this.handleChangeImage = this.handleChangeImage.bind(this);
+        this.handleChangeMinutes = this.handleChangeMinutes.bind(this);
+        this.handleChangeReminderDate = this.handleChangeReminderDate.bind(this);
+        this.handleChangeTitle = this.handleChangeTitle.bind(this);
     
         this.state = {
           show: false,
         };
       }
       handleDayClick(day) {
-        this.setState({ selectedDay: day });
+        let today = new Date(day);
+        today = today.toISOString();
+        today = today.toString();
+        this.setState({ selectedDay: day, selectDay: today });
+        console.log(this.state.selectDay);
       }
       
     getPickerValue = value => {
@@ -61,12 +83,104 @@ class AddTask extends React.Component {
     }
 
     handleClose() {
-        this.setState({ show: false });
+        this.setState({ 
+            show: false,
+            selectedDay: undefined,
+            title: null,
+            description: null,
+            dueDate: null,
+            reminderDate: null,
+            userId: null,
+            image: null,
+            reminder: false,
+            imageURL: '',
+            hours: null,
+            minutes: null,
+            selectDay: null,
+        });
     }
     
     handleShow() {
         this.setState({ show: true });
     }
+
+    handleChangeTitle = (e) => {
+        this.setState({
+          title: e.target.value
+        });
+    }
+    handleChangeDescription = (e) => {
+        this.setState({
+          description: e.target.value
+        });
+    }
+    handleChangeReminderDate = (e) => {
+        this.setState({
+          reminderDate: e.target.value
+        });
+    }
+    handleChangeImage = (e) => {
+        this.setState({ image: e.target.files[0] });
+        this.setState({ imageURL: URL.createObjectURL(new Blob(e.target.files))});
+    }
+    handleChangeHours = (e) => {
+        if (e.value === 24){
+            e.value = 0;
+        }
+        this.setState({
+            hours: e.value
+          });
+        console.log(this.state.hours);
+    }
+    handleChangeMinutes = (e) => {
+        this.setState({
+            minutes: e.value
+          });
+          console.log(this.state.minutes);
+    }
+
+    handleSubmit = (e) => {
+        console.log(this.state);
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('image', this.state.image)
+        formData.set('description', this.state.description)
+        formData.set('dueDate', this.state.selectDay)
+        if (this.state.reminder){
+            var dt = new Date(this.state.selectedDay);
+            console.log(dt.setDate(dt.getDate() - this.state.reminderDate));
+            dt.setHours(dt.getHours() + this.state.hours-17 );
+            dt.setMinutes(dt.getMinutes() + this.state.minutes);
+            dt = dt.toISOString();
+            dt = dt.toString();
+            dt = dt.split('Z');
+            console.log(dt[0]);
+            dt = dt[0] + '-05:00';
+            formData.set('reminderDate', dt)
+
+        }
+        formData.set('userId', window.localStorage.getItem('userId'))
+        formData.set('title', this.state.title)
+        var object = {};
+        formData.forEach(function(value, key){
+            object[key] = value;
+        });
+        var json = JSON.stringify(object);
+
+        console.log(json);
+
+        addTask(formData).then((res) => {
+            if(res.data.title) {
+                this.handleClose();
+                Notify.createNotification('success', 'Add Task', 'Task has been added');
+            }
+        }).catch((err) => {
+            Notify.createNotification('error', 'Add Task Error', err.message);
+        });
+       
+
+    }
+
 
     render() {
         return (
@@ -84,15 +198,21 @@ class AddTask extends React.Component {
                     </div>                                           
                 </div>
                 <div className='row'>
-                    <div className="col-6 mr-auto">
+                    <div className='width'>
                         <div className="card-body">
                             <div className="col-12 input-group title-addTask">TASK TITLE</div>
                             <div className="col-12">
                             <Form.Group controlId="formBasicEmail">
-                                <Form.Control id="input_taskTitle" type="text" placeholder="Text Input" />                                
+                                <Form.Control id="input_taskTitle" type="text" placeholder="Title" onChange={this.handleChangeTitle} />                                
                             </Form.Group>
                             </div>                    
-                        </div>                                   
+                        </div> 
+                        <div className='card-body second'>
+                            <div className="form-group">
+                                <img src={this.state.imageURL} alt="" className="task-before-image"/>
+                                <input type="file" className="form-control-file" id="file" onChange={this.handleChangeImage}/>
+                            </div>
+                        </div>                                  
                     </div>
                 </div>
                 <div className='row'>
@@ -101,7 +221,7 @@ class AddTask extends React.Component {
                             <div className="col-12 input-group title-addTask">TASK DESCRIPTION</div>
                             <div className="col-12">
                             <Form.Group controlId="exampleForm.ControlTextarea1">
-                                <Form.Control as="textarea" id="input_taskDescription" rows="3" />
+                                <Form.Control as="textarea" id="input_taskDescription" rows="3" onChange={this.handleChangeDescription}/>
                             </Form.Group>
                             </div>                    
                         </div>                                   
@@ -123,17 +243,17 @@ class AddTask extends React.Component {
                                 <Form.Group controlId="formBasicEmail">
                                     <Form.Label>Would you like a reminder?</Form.Label><br/>
                                     <Form.Group>
-                                        <Form.Check type="radio" label="Yes" name="formHorizontalRadios" id="radio_yes" />
-                                        <Form.Check type="radio" label="No" name="formHorizontalRadios" id="radio_no" />
+                                        <Form.Check type="radio" label="Yes" name="formHorizontalRadios" id="radio_yes" onClick={() => this.setState({reminder: true})} />
+                                        <Form.Check type="radio" label="No" name="formHorizontalRadios" id="radio_no" onClick={() => this.setState({reminder: false})}/>
                                     </Form.Group>
                                     <Form.Label>At what time of the day?</Form.Label>
                                     <div className="row col-8 time-container mr-auto">
-                                        <Select className="col-5" id="select_hours" options={ hours } />
+                                        <Select className="col-5" id="select_hours" options={ hours } onChange={this.handleChangeHours}/>
                                         <p className="col-2">:</p>
-                                        <Select className="col-5" id="select_minutes" options={ minutes } />
+                                        <Select className="col-5" id="select_minutes" options={ minutes } onChange={this.handleChangeMinutes}/>
                                     </div>                                    
                                     <Form.Label>Number of days before the due date to be informed:</Form.Label>
-                                    <Form.Control className="col-6" id="input_numDays" type="number" placeholder="e.g. 3" />                                
+                                    <Form.Control className="col-6" id="input_numDays" type="number" placeholder="e.g. 3" onChange={this.handleChangeReminderDate}/>                                
                                 </Form.Group>
                             </div>                    
                         </div>                                   
@@ -143,7 +263,7 @@ class AddTask extends React.Component {
                     <div className="col-6 custom-div">
                         <div className="card-body">
                             <div className="col-8 m-auto">
-                                <button id="button_addTask" class="custom-btn"><b>ADD</b></button>                            
+                                <button id="button_addTask" className="custom-btn" onClick={this.handleSubmit}><b>ADD</b></button>                            
                             </div>
                         </div>
                     </div>

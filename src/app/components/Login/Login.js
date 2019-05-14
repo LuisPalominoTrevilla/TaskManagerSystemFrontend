@@ -32,11 +32,13 @@ class Login extends Component{
     accountLogin(this.state.email, this.state.password).then(
       (res) => {
         if(res.data.name) {
-          this.props.history.push('/habits');
+          window.localStorage.setItem('userId', res.data.email);
+          console.log(window.localStorage.getItem('userId'));
           this.setState({
             email: '',
             password: ''
           })
+          this.props.history.push('/habits');
         }
       }
     ).catch((err) => {

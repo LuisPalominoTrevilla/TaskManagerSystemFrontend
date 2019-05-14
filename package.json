@@ -5,7 +5,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^8.0.0",
+    "moment": "^2.24.0",
     "node-sass": "^4.11.0",
+    "prop-types": "^15.7.2",
     "rc-time-picker": "^3.6.4",
     "react": "^16.8.1",
     "react-bootstrap": "^1.0.0-beta.8",
