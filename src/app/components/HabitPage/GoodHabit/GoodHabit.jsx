@@ -1,36 +1,65 @@
 import React from 'react';
 import './GoodHabit.scss';
+import { getUserHabits, deleteHabit } from '../../../actions/habits';
+import  Notify  from '../../../utils/notifier';
 
 class GoodHabit extends React.Component {
+    constructor() {
+        super();
+        // this.handleNegative = this.handleNegative.bind(this);
+        this.handleDeleteHabit = this.handleDeleteHabit.bind(this);
+      }
+    //   handleNegative() {
+    //     const data = {
+    //         completionStatus: 0
+    //     }
+    //         completeHabit(this.props.id, querystring.stringify(data)).then(()=>{
+    //             Notify.createNotification('success', 'Update Score', 'Score Updated Successfuly');
+    //         }).catch((err) => {
+    //             Notify.createNotification('error', 'Update Score', err.message);
+    //         })
+    //   }
+
+      handleDeleteHabit() {
+        deleteHabit(this.props.id).then(() => {
+          Notify.createNotification('success', 'Delete Habit', 'The habit was deleted successfully');
+          getUserHabits().then(res => {this.props.changeHabit(res.data)})
+        }).catch((err) => {
+          Notify.createNotification('error', 'Delete Habit', err.message);
+        })
+    
+      }
     render() {
         return (
-            <div className='contain-good-habit'>
+            <div hidden={!this.props.good} className='contain-good-habit'>
                 <div className='button-positive'>
-                    <i class="fas fa-plus"></i>
+                    <i className="fas fa-plus"></i>
                 </div>
                 <div className='content-good-habit'>
                     <img 
-                    src="https://cdn1.medicalnewstoday.com/content/images/articles/290/290814/benefits-of-drinking-water.jpg"
+                    src={this.props.imageUrl}
                     alt =''/>
                     <div className='information-good-habit'>
                         <div>
                             <div className='information-header-good-habit'>
                                 <div className='title-good-habit'>
-                                    Drink Water
+                                    {this.props.title}
                                 </div>
                                 <div className='score-good-habit'>
-                                    Score: 45
+                                    Score: {this.props.score}
                                 </div>
                             </div>
                             <div className='description-good-habit'>
-                                Good Habit
+                                {this.props.type}
                                 <br/>
-                                Easy to do
+                                {this.props.dificulty}
                             </div>
                         </div>
                         <div className="edit-erease-good-habit">
-                            <i class="fas fa-pencil-alt"></i>
-                            <i class="fas fa-trash-alt"></i>
+                            <i className="fas fa-pencil-alt"></i>
+                            <button  style={{color: 'green'}} onClick={this.handleDeleteHabit}>
+                            <i className="fas fa-trash-alt"></i>
+                            </button>
                         </div>
                     </div>
                 </div>

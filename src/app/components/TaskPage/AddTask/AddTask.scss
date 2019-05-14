@@ -42,6 +42,17 @@
             text-align: center;
         }
     }
+    .task-before-image {
+        width: 25rem;
+        height: 25rem;
+    }
+    .card-body.second {
+            display: flex;
+            justify-content: center;
+    }
+    .width{
+        width: 100%;
+    }
 }
 
 @media (min-width: 1200px){

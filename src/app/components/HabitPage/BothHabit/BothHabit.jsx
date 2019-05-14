@@ -1,41 +1,70 @@
 import React from 'react';
 import './BothHabit.scss';
+import { getUserHabits, deleteHabit } from '../../../actions/habits';
+import  Notify  from '../../../utils/notifier';
 
 class BothHabit extends React.Component {
+    constructor() {
+        super();
+        // this.handleNegative = this.handleNegative.bind(this);
+        this.handleDeleteHabit = this.handleDeleteHabit.bind(this);
+      }
+    //   handleNegative() {
+    //     const data = {
+    //         completionStatus: 0
+    //     }
+    //         completeHabit(this.props.id, querystring.stringify(data)).then(()=>{
+    //             Notify.createNotification('success', 'Update Score', 'Score Updated Successfuly');
+    //         }).catch((err) => {
+    //             Notify.createNotification('error', 'Update Score', err.message);
+    //         })
+    //   }
+
+      handleDeleteHabit() {
+        deleteHabit(this.props.id).then(() => {
+          Notify.createNotification('success', 'Delete Habit', 'The habit was deleted successfully');
+          getUserHabits().then(res => {this.props.changeHabit(res.data)})
+        }).catch((err) => {
+          Notify.createNotification('error', 'Delete Habit', err.message);
+        })
+    
+      }
     render() {
         return (
-            <div className='contain-both-habit'>
+            <div hidden={!this.props.both} className='contain-both-habit'>
                 <div className='button-negative'>
-                    <i class="fas fa-plus"></i>
+                    <i className="fas fa-plus"></i>
                 </div>
                 <div className='content-both-habit'>
                     <img 
-                    src="https://media.npr.org/assets/img/2018/03/16/cig-in-air_wide-cf2d76590e33ee7b85f9f9ba1d0db11a0ce79e9d-s800-c85.jpg"
+                    src={this.props.imageUrl}
                     alt =''/>
                     <div className='information-both-habit'>
                         <div>
                             <div className='information-header-both-habit'>
                                 <div className='title-both-habit'>
-                                    Smoke
+                                    {this.props.title}
                                 </div>
                                 <div className='score-both-habit'>
-                                    Score: 45
+                                    Score: {this.props.score}
                                 </div>
                             </div>
                             <div className='description-both-habit'>
-                                Bad Habit
+                                {this.props.type}
                                 <br/>
-                                hard to do
+                                {this.props.dificulty}
                             </div>
                         </div>
                         <div className="edit-erease-both-habit">
-                            <i class="fas fa-pencil-alt"></i>
-                            <i class="fas fa-trash-alt"></i>
+                            <i className="fas fa-pencil-alt"></i>
+                            <button  style={{color: 'yellow'}} onClick={this.handleDeleteHabit}>
+                            <i className="fas fa-trash-alt"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
                 <div className='button-negative'>
-                    <i class="fas fa-minus"></i>
+                    <i className="fas fa-minus"></i>
                 </div>
             </div>
         )
