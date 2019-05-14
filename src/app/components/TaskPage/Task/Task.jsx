@@ -10,12 +10,27 @@ export default class Task extends Component {
     super(props);
     this.state ={
       color: this.props.color,
-      completed: this.props.completed
+      completed: this.props.completed,
+      overdue: this.props.overdue,
+      isOverdue: false,
     }
     this.handleDeleteTask = this.handleDeleteTask.bind(this);
     this.updateComplete = this.updateComplete.bind(this);
     this.done = this.done.bind(this);
-    this.todo = this.todo.bind(this);
+  }
+
+  componentDidMount(){
+    let someDate = new Date(this.props.dueDate);
+        const today = new Date()
+        if( someDate.getDate() == today.getDate() &&
+          someDate.getMonth() == today.getMonth() &&
+          someDate.getFullYear() == today.getFullYear()) {
+            this.setState({isOverdue: false});
+          } else if (someDate > today){
+            this.setState({isOverdue: false});
+          } else {
+            this.setState({isOverdue: true});
+          }
   }
 
   handleDeleteTask() {
@@ -35,20 +50,18 @@ export default class Task extends Component {
       Notify.createNotification('error', 'Update Task Status', err.message);
     })
   }
-  todo() {
-    this.setState({completed: false});
-    this.updateComplete();
-  }
-  done(e) {
+
+  done() {
     var e = document.getElementById("task-done");
     var value = e.options[e.selectedIndex].value;
     this.setState({completed: value});
     this.updateComplete();
   }
 
+
   render() {
     return (
-      <div className='task-contain-page' style={{borderColor: this.state.color}}>
+      <div hidden={!(this.state.overdue === this.state.isOverdue)} className='task-contain-page' style={{borderColor: this.state.color}}>
           <div className='information-task'>
             <div className='d-flex'>
                 <img
