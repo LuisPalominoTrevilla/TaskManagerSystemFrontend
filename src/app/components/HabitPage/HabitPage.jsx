@@ -60,6 +60,11 @@ class HabitPage extends React.Component {
         }
         return false;
       }
+
+      handleLanguage(langValue) {
+        this.setState({habits: langValue});
+      }
+
     render() {
         return(
         <div className='habit-contain'>
@@ -67,7 +72,8 @@ class HabitPage extends React.Component {
             <Menu/>
             <div className='habits'>
                 <div className='habit-button-alignment'>
-                <AddHabit/>
+                <AddHabit
+                changeHabit ={this.handleLanguage.bind(this)}/>
                 </div>
                 {
               this.state.habits.map(habit => (
@@ -79,6 +85,8 @@ class HabitPage extends React.Component {
                     imageUrl={habit.imageUrl}
                     dificulty={this.handleDificulty(habit.difficulty)}
                     type={this.handleType(habit.type)}
+                    id={habit.id}
+                    changeHabit ={this.handleLanguage.bind(this)}
                     />
                     <GoodHabit
                     good={this.handleGood(habit.type)}
@@ -87,6 +95,8 @@ class HabitPage extends React.Component {
                     imageUrl={habit.imageUrl}
                     dificulty={this.handleDificulty(habit.difficulty)}
                     type={this.handleType(habit.type)}
+                    id={habit.id}
+                    changeHabit ={this.handleLanguage.bind(this)}
                     />
                     <BothHabit
                     both={this.handleBoth(habit.type)}
@@ -95,6 +105,8 @@ class HabitPage extends React.Component {
                     imageUrl={habit.imageUrl}
                     dificulty={this.handleDificulty(habit.difficulty)}
                     type={this.handleType(habit.type)}
+                    id={habit.id}
+                    changeHabit ={this.handleLanguage.bind(this)}
                     />
               </div>
               ))}

@@ -6,22 +6,6 @@ import './TaskPage.scss';
 import Task from './Task/Task';
 import { getUserTask } from '../../actions/tasks';
 
-function RenderTasks( {tasks}, taskChange) {
-  console.log(taskChange);
-  return tasks.map(task => (
-    <Task
-    title= {task.title}
-    taskId = {task.taskId}
-    description={task.description}
-    dueDate={task.dueDate}
-    reminderDate={task.reminderDate}
-    imageUrl={task.imageUrl}
-    userId={task.userId}
-    changeTask ={taskChange}
-    />
-  ));
-}
-
 class TaskPage extends React.Component {
 
     constructor(props, context) {
@@ -55,9 +39,9 @@ class TaskPage extends React.Component {
       updateColor(someDate) {
         someDate = new Date(someDate);
         const today = new Date()
-        if( someDate.getDate() == today.getDate() &&
-          someDate.getMonth() == today.getMonth() &&
-          someDate.getFullYear() == today.getFullYear()) {
+        if( someDate.getDate() === today.getDate() &&
+          someDate.getMonth() === today.getMonth() &&
+          someDate.getFullYear() === today.getFullYear()) {
             return '#C80E14';
           } else if (someDate > today){
             return '#F7AF47';
@@ -69,9 +53,9 @@ class TaskPage extends React.Component {
       overdue(someDate) {
         someDate = new Date(someDate);
         const today = new Date()
-        if( someDate.getDate() == today.getDate() &&
-          someDate.getMonth() == today.getMonth() &&
-          someDate.getFullYear() == today.getFullYear()) {
+        if( someDate.getDate() === today.getDate() &&
+          someDate.getMonth() === today.getMonth() &&
+          someDate.getFullYear() === today.getFullYear()) {
             return false;
           } else if (someDate > today){
             return false;
