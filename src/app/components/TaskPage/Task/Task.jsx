@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import './Task.scss';
 import PropTypes from 'prop-types';
-import { deleteTask, getUserTask } from '../../../actions/tasks';
+import { deleteTask, getUserTask, updateTask } from '../../../actions/tasks';
 import  Notify  from '../../../utils/notifier';
 
 
 export default class Task extends Component {
   constructor(props) {
     super(props);
+    this.state ={
+      color: this.props.color,
+      completed: this.props.completed
+    }
     this.handleDeleteTask = this.handleDeleteTask.bind(this);
+    this.updateComplete = this.updateComplete.bind(this);
+    this.done = this.done.bind(this);
+    this.todo = this.todo.bind(this);
   }
 
   handleDeleteTask() {
@@ -21,22 +28,42 @@ export default class Task extends Component {
 
   }
 
+  updateComplete() {
+    updateTask( this.props.taskId ,{'completed': this.state.completed}).then((res)=> {
+      Notify.createNotification('success', 'Update Task Status', 'The task was edited successfully');
+    }).catch((err) => {
+      Notify.createNotification('error', 'Update Task Status', err.message);
+    })
+  }
+  todo() {
+    this.setState({completed: false});
+    this.updateComplete();
+  }
+  done(e) {
+    var e = document.getElementById("task-done");
+    var value = e.options[e.selectedIndex].value;
+    this.setState({completed: value});
+    this.updateComplete();
+  }
+
   render() {
     return (
-      <div className='task-contain-page'>
+      <div className='task-contain-page' style={{borderColor: this.state.color}}>
           <div className='information-task'>
             <div className='d-flex'>
                 <img
                 src={this.props.imageUrl}
                 alt=''/>
                 <div className='ml-4'>
-                    <div className='title-task'>{this.props.title}</div>
+                    <div className='title-task' style={{color: this.state.color}} >{this.props.title}</div>
                     <div className='due-date-task'>Due: {this.props.dueDate}</div>
                 </div>
             </div>
-            <div className="edit-erease-task">
+            <div className="edit-erease-task" style={{color: this.state.color}}>
+                <button className='task-erease-button' style={{color: this.state.color}}>
                 <i className="fas fa-pencil-alt"></i>
-                <button className='task-erease-button' onClick={this.handleDeleteTask}>
+                </button>
+                <button className='task-erease-button' style={{color: this.state.color}} onClick={this.handleDeleteTask}>
                 <i className="fas fa-trash-alt" ></i>
                 </button>
             </div>
@@ -45,11 +72,10 @@ export default class Task extends Component {
               {this.props.description}
           </div>
           <div className= 'd-flex justify-content-between'>
-            <i className="fas fa-bell"></i>
-            <select name='progress' className='select-progress-task'>
-                <option value='toDo'>TO DO</option>
-                <option value='inProgress'>IN PROGRESS</option>
-                <option value='done'>DONE</option>
+            <div></div>
+            <select name='progress' id='task-done' onChange={this.done} className='select-progress-task'>
+                <option selected={this.state.completed} value={false} >TO DO</option>
+                <option selected={this.state.completed} value={true} >DONE</option>
             </select>
           </div>
         
@@ -66,4 +92,5 @@ Task.propTypes = {
   reminderDate: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
   userId: PropTypes.string.isRequired,
+  completed: PropTypes.bool.isRequired
 }

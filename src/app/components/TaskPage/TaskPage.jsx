@@ -73,7 +73,9 @@ class TaskPage extends React.Component {
             reminderDate={task.reminderDate}
             imageUrl={task.imageUrl}
             userId={task.userId}
+            completed={task.completed}
             changeTask ={this.handleLanguage.bind(this)}
+            color={'green'}
             />
             ))}
         </div>)
