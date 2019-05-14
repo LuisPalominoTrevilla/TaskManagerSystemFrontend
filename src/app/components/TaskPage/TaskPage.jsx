@@ -33,6 +33,7 @@ class TaskPage extends React.Component {
         this.state = {
           show: false,
           tasks: [],
+          color: 'blue'
         };
       }
 
@@ -51,6 +52,19 @@ class TaskPage extends React.Component {
         getUserTask().then(res => {this.setState({tasks: res.data})})
 
       }
+      updateColor(someDate) {
+        someDate = new Date(someDate);
+        const today = new Date()
+        if( someDate.getDate() == today.getDate() &&
+          someDate.getMonth() == today.getMonth() &&
+          someDate.getFullYear() == today.getFullYear()) {
+            return '#C80E14';
+          } else if (someDate > today){
+            return '#F7AF47';
+          } else {
+            return '#F7AF47';
+          }
+      }
     
     render() {
         return(
@@ -64,7 +78,8 @@ class TaskPage extends React.Component {
                     />
                 </div>
             </div>
-            {this.state.tasks.map(task => (
+            {
+            this.state.tasks.map(task => (
             <Task
             title= {task.title}
             taskId = {task.taskId}
@@ -75,7 +90,7 @@ class TaskPage extends React.Component {
             userId={task.userId}
             completed={task.completed}
             changeTask ={this.handleLanguage.bind(this)}
-            color={'green'}
+            color={this.updateColor(task.dueDate)}
             />
             ))}
         </div>)
