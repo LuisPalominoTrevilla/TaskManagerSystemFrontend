@@ -1,8 +1,26 @@
 import React, { Component } from 'react';
 import './Task.scss';
 import PropTypes from 'prop-types';
+import { deleteTask, getUserTask } from '../../../actions/tasks';
+import  Notify  from '../../../utils/notifier';
+
 
 export default class Task extends Component {
+  constructor(props) {
+    super(props);
+    this.handleDeleteTask = this.handleDeleteTask.bind(this);
+  }
+
+  handleDeleteTask() {
+    deleteTask(this.props.taskId).then((res) => {
+      Notify.createNotification('success', 'Delete Task', 'The task was deleted successfully');
+      getUserTask().then(res => {this.props.changeTask(res.data)})
+    }).catch((err) => {
+      Notify.createNotification('error', 'Delete Task', err.message);
+    })
+
+  }
+
   render() {
     return (
       <div className='task-contain-page'>
@@ -18,7 +36,9 @@ export default class Task extends Component {
             </div>
             <div className="edit-erease-task">
                 <i className="fas fa-pencil-alt"></i>
-                <i className="fas fa-trash-alt"></i>
+                <button className='task-erease-button' onClick={this.handleDeleteTask}>
+                <i className="fas fa-trash-alt" ></i>
+                </button>
             </div>
           </div>
           <div className='task-description'>
@@ -45,5 +65,5 @@ Task.propTypes = {
   dueDate: PropTypes.string.isRequired,
   reminderDate: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired
+  userId: PropTypes.string.isRequired,
 }
