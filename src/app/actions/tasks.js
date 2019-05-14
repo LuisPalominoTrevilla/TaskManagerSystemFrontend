@@ -16,3 +16,18 @@ export function getUserTask() {
     url: `${process.env.REACT_APP_TASK_API_URL}?userId=${window.localStorage.getItem('userId')}`,
     }))
 }
+
+export function updateTask(task, taskData) { 
+    return(axios({
+    method: 'update',
+    data: taskData,
+    url: `${process.env.REACT_APP_TASK_API_URL}/${task}`,
+    }))
+}
+
+export function deleteTask(task) { 
+    return(axios({
+    method: 'delete',
+    url: `${process.env.REACT_APP_TASK_API_URL}/${task}`,
+    }))
+}

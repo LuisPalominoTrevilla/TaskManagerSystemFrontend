@@ -6,7 +6,8 @@ import './TaskPage';
 import Task from './Task/Task';
 import { getUserTask } from '../../actions/tasks';
 
-function RenderTasks({ tasks }) {
+function RenderTasks( {tasks}, taskChange) {
+  console.log(taskChange);
   return tasks.map(task => (
     <Task
     title= {task.title}
@@ -16,6 +17,7 @@ function RenderTasks({ tasks }) {
     reminderDate={task.reminderDate}
     imageUrl={task.imageUrl}
     userId={task.userId}
+    changeTask ={taskChange}
     />
   ));
 }
@@ -27,11 +29,16 @@ class TaskPage extends React.Component {
     
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
-    
+
         this.state = {
           show: false,
           tasks: [],
+          color: 'blue'
         };
+      }
+
+      handleLanguage(langValue) {
+        this.setState({tasks: langValue});
       }
 
       handleClose() {
@@ -45,6 +52,19 @@ class TaskPage extends React.Component {
         getUserTask().then(res => {this.setState({tasks: res.data})})
 
       }
+      updateColor(someDate) {
+        someDate = new Date(someDate);
+        const today = new Date()
+        if( someDate.getDate() == today.getDate() &&
+          someDate.getMonth() == today.getMonth() &&
+          someDate.getFullYear() == today.getFullYear()) {
+            return '#C80E14';
+          } else if (someDate > today){
+            return '#F7AF47';
+          } else {
+            return '#F7AF47';
+          }
+      }
     
     render() {
         return(
@@ -53,10 +73,26 @@ class TaskPage extends React.Component {
             <Menu/>
             <div className='habits'>
                 <div className='habit-button-alignment'>
-                    <AddTask/>
+                    <AddTask
+                    changeTask = {this.handleLanguage.bind(this)}
+                    />
                 </div>
             </div>
-            <RenderTasks tasks={this.state.tasks ? this.state.tasks: []}/>
+            {
+            this.state.tasks.map(task => (
+            <Task
+            title= {task.title}
+            taskId = {task.taskId}
+            description={task.description}
+            dueDate={task.dueDate}
+            reminderDate={task.reminderDate}
+            imageUrl={task.imageUrl}
+            userId={task.userId}
+            completed={task.completed}
+            changeTask ={this.handleLanguage.bind(this)}
+            color={this.updateColor(task.dueDate)}
+            />
+            ))}
         </div>)
     }
 }

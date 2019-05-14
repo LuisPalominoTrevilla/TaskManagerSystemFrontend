@@ -4,7 +4,7 @@ import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import Select from 'react-select';
 import './AddTask.scss';
-import { addTask } from '../../../actions/tasks';
+import { addTask, getUserTask } from '../../../actions/tasks';
 import  Notify  from '../../../utils/notifier';
 
 const hours = [
@@ -173,6 +173,7 @@ class AddTask extends React.Component {
             if(res.data.title) {
                 this.handleClose();
                 Notify.createNotification('success', 'Add Task', 'Task has been added');
+                getUserTask().then(res => {this.props.changeTask(res.data)})
             }
         }).catch((err) => {
             Notify.createNotification('error', 'Add Task Error', err.message);
