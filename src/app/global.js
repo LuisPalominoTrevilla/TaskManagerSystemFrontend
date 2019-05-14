@@ -1,1 +1,1 @@
-global.user = '';
+export let user = '';
