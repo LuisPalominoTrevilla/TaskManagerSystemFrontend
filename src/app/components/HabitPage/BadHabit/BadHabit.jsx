@@ -4,25 +4,25 @@ import './BadHabit.scss';
 class BadHabit extends React.Component {
     render() {
         return (
-            <div className='contain-bad-habit'>
+            <div hidden={!this.props.bad} className='contain-bad-habit'>
                 <div className='content-bad-habit'>
                     <img 
-                    src="https://media.npr.org/assets/img/2018/03/16/cig-in-air_wide-cf2d76590e33ee7b85f9f9ba1d0db11a0ce79e9d-s800-c85.jpg"
+                    src={this.props.imageUrl}
                     alt =''/>
                     <div className='information-bad-habit'>
                         <div>
                             <div className='information-header-bad-habit'>
                                 <div className='title-bad-habit'>
-                                    Smoke
+                                    {this.props.title}
                                 </div>
                                 <div className='score-bad-habit'>
-                                    Score: 45
+                                    Score: {this.props.score}
                                 </div>
                             </div>
                             <div className='description-bad-habit'>
-                                Bad Habit
+                                {this.props.type}
                                 <br/>
-                                hard to do
+                                {this.props.dificulty}
                             </div>
                         </div>
                         <div className="edit-erease-bad-habit">
