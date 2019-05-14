@@ -44,14 +44,15 @@ export default class Task extends Component {
   }
 
   updateComplete() {
-    updateTask( this.props.taskId ,{'completed': this.state.completed}).then((res)=> {
+    updateTask( this.props.taskId ).then(()=> {
       Notify.createNotification('success', 'Update Task Status', 'The task was edited successfully');
+      this.setState({completed: true});
     }).catch((err) => {
       Notify.createNotification('error', 'Update Task Status', err.message);
     })
   }
 
-  done() {
+  done(value) {
     var e = document.getElementById("task-done");
     var value = e.options[e.selectedIndex].value;
     this.setState({completed: value});
@@ -86,10 +87,11 @@ export default class Task extends Component {
           </div>
           <div className= 'd-flex justify-content-between'>
             <div></div>
-            <select name='progress' id='task-done' onChange={this.done} className='select-progress-task'>
+            <select hidden={this.state.completed} name='progress' id='task-done' onChange={this.done} className='select-progress-task'>
                 <option selected={this.state.completed} value={false} >TO DO</option>
                 <option selected={this.state.completed} value={true} >DONE</option>
             </select>
+            <div hidden={!this.state.completed}>COMPLETED</div>
           </div>
         
       </div>

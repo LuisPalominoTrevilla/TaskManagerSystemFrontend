@@ -17,11 +17,10 @@ export function getUserTask() {
     }))
 }
 
-export function updateTask(task, taskData) { 
+export function updateTask(task) { 
     return(axios({
-    method: 'update',
-    data: taskData,
-    url: `${process.env.REACT_APP_TASK_API_URL}/${task}`,
+    method: 'post',
+    url: `${process.env.REACT_APP_TASK_API_URL}/${task}/complete`,
     }))
 }
 
