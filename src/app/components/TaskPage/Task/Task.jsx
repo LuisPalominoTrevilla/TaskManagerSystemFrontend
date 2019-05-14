@@ -22,9 +22,9 @@ export default class Task extends Component {
   componentDidMount(){
     let someDate = new Date(this.props.dueDate);
         const today = new Date()
-        if( someDate.getDate() == today.getDate() &&
-          someDate.getMonth() == today.getMonth() &&
-          someDate.getFullYear() == today.getFullYear()) {
+        if( someDate.getDate() === today.getDate() &&
+          someDate.getMonth() === today.getMonth() &&
+          someDate.getFullYear() === today.getFullYear()) {
             this.setState({isOverdue: false});
           } else if (someDate > today){
             this.setState({isOverdue: false});
@@ -52,7 +52,7 @@ export default class Task extends Component {
     })
   }
 
-  done(value) {
+  done() {
     var e = document.getElementById("task-done");
     var value = e.options[e.selectedIndex].value;
     this.setState({completed: value});
