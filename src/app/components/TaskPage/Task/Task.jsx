@@ -9,7 +9,7 @@ export default class Task extends Component {
           <div className='information-task'>
             <div className='d-flex'>
                 <img
-                src='https://www.wgu.edu/content/dam/web-sites/blog-newsroom/blog/images/national/2017/dec/anon-on-laptop.jpg.transform/original/image.png'
+                src={this.props.imageUrl}
                 alt=''/>
                 <div className='ml-4'>
                     <div className='title-task'>{this.props.title}</div>
@@ -40,7 +40,7 @@ export default class Task extends Component {
 
 Task.propTypes = {
   title: PropTypes.string.isRequired,
-  taskId: PropTypes.number.isRequired,
+  taskId: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   dueDate: PropTypes.string.isRequired,
   reminderDate: PropTypes.string.isRequired,

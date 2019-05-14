@@ -2,9 +2,23 @@ import React from 'react';
 import Header from '../Header/Header';
 import Menu from '../Menu/Menu';
 import AddTask from '../TaskPage/AddTask/AddTask'
-import {Modal, Button, Col} from 'react-bootstrap';
 import './TaskPage';
 import Task from './Task/Task';
+import { getUserTask } from '../../actions/tasks';
+
+function RenderTasks({ tasks }) {
+  return tasks.map(task => (
+    <Task
+    title= {task.title}
+    taskId = {task.taskId}
+    description={task.description}
+    dueDate={task.dueDate}
+    reminderDate={task.reminderDate}
+    imageUrl={task.imageUrl}
+    userId={task.userId}
+    />
+  ));
+}
 
 class TaskPage extends React.Component {
 
@@ -16,6 +30,7 @@ class TaskPage extends React.Component {
     
         this.state = {
           show: false,
+          tasks: [],
         };
       }
 
@@ -26,7 +41,10 @@ class TaskPage extends React.Component {
       handleShow() {
         this.setState({ show: true });
       }
+      componentDidMount(){
+        getUserTask().then(res => {this.setState({tasks: res.data})})
 
+      }
     
     render() {
         return(
@@ -38,7 +56,7 @@ class TaskPage extends React.Component {
                     <AddTask/>
                 </div>
             </div>
-            <Task/>
+            <RenderTasks tasks={this.state.tasks ? this.state.tasks: []}/>
         </div>)
     }
 }
