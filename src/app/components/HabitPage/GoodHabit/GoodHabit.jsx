@@ -4,28 +4,28 @@ import './GoodHabit.scss';
 class GoodHabit extends React.Component {
     render() {
         return (
-            <div className='contain-good-habit'>
+            <div hidden={!this.props.good} className='contain-good-habit'>
                 <div className='button-positive'>
                     <i className="fas fa-plus"></i>
                 </div>
                 <div className='content-good-habit'>
                     <img 
-                    src="https://cdn1.medicalnewstoday.com/content/images/articles/290/290814/benefits-of-drinking-water.jpg"
+                    src={this.props.imageUrl}
                     alt =''/>
                     <div className='information-good-habit'>
                         <div>
                             <div className='information-header-good-habit'>
                                 <div className='title-good-habit'>
-                                    Drink Water
+                                    {this.props.title}
                                 </div>
                                 <div className='score-good-habit'>
-                                    Score: 45
+                                    Score: {this.props.score}
                                 </div>
                             </div>
                             <div className='description-good-habit'>
-                                Good Habit
+                                {this.props.type}
                                 <br/>
-                                Easy to do
+                                {this.props.dificulty}
                             </div>
                         </div>
                         <div className="edit-erease-good-habit">
